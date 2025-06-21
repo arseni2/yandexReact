@@ -1,0 +1,77 @@
+.base {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    padding: 15px 27px 15px 27px;
+    font-family: "Roboto", sans-serif;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 110%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: rgb(32, 27, 16);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.green {
+    background: rgb(42, 232, 129) !important;
+}
+
+.base:disabled {
+    background: rgb(192, 192, 192) !important;
+    color: #787878 !important;
+}
+
+.yellow {
+    background: rgb(252, 227, 0) !important;
+}
+
+.black {
+    background: rgb(32, 27, 16) !important;
+    color: white
+}
+
+.white {
+    border-radius: 10px !important;
+    background: rgb(255, 255, 255) !important;
+}
+.upload {
+    border-radius: 10px !important;
+    background: rgb(203, 129, 255) !important;
+    width: 100% !important;
+}
+.loading {
+    border-radius: 10px !important;
+    background: rgb(203, 129, 255) !important;
+    width: 100% !important;
+}
+.done {
+    border-radius: 10px !important;
+    background: rgb(212, 250, 230) !important;
+}
+.error {
+    border-radius: 10px !important;
+    color: white;
+    background: rgb(255, 95, 0) !important;
+}
+
+.iconButton {
+    border-radius: 10px;
+    background: rgb(32, 27, 16);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 53px;
+    height: 53px;
+}
+
+.textError {
+    color: #FF5F00;
+}

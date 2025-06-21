@@ -1,0 +1,28 @@
+.loaderContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+}
+
+.rotatingSegment {
+    transform-origin: center center;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

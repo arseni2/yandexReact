@@ -1,0 +1,12 @@
+.button_container {
+    display: flex;
+    gap: 20px;
+    margin-top: 37px;
+    justify-content: center;
+}
+
+.container_history {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

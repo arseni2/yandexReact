@@ -1,0 +1,45 @@
+.uploadFormTitle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.dropzone {
+    max-width: 100%;
+    background: #EACDFF;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.highlightContainer {
+    height: 407px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colorText {
+    color: #CB81FF
+}
+
+.dragging {
+    background-color: #D4FAE6;
+}
+.draggingSuccess {
+    border: 1px solid rgb(32, 27, 16);
+    border-radius: 40px;
+    background: rgb(252, 226, 255);
+}
+.draggingError {
+    border: 1px solid rgb(255, 95, 0);
+    border-radius: 40px;
+    background: rgb(252, 226, 255);
+}

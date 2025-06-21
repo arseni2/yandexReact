@@ -1,0 +1,21 @@
+.bold {
+    font-weight: bold;
+}
+.base {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.alignCenter {
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.disabled {
+    opacity: 0.5;
+}

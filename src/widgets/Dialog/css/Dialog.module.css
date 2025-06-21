@@ -1,0 +1,50 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    box-shadow: -6px 21px 100px 0px rgba(0, 0, 0, 0.35);
+}
+
+.closeBtn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    max-width: 700px;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: auto;
+
+}
+
+.closeBtnItem {
+    cursor: pointer;
+    border-radius: 10px;
+    background: rgb(32, 27, 16);
+    padding: 18px;
+    margin-right: -80px;
+    margin-bottom: -30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
