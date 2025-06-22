@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {type ChangeEvent, useEffect, useRef, useState} from 'react';
 import Typography from '../../../shared/Typography/ui/Typography.tsx';
 import styles from '../css/UploadForm.module.css';
 import Button from "../../../shared/Button/ui/Button.tsx";
@@ -8,9 +8,12 @@ import {useAnalyticStore} from "../../../store/slices/analytic.ts";
 import {useHistoryStore} from "../../../store/slices/history.ts";
 import {formatDate} from "../../../pages/CsvGenerator/utils/formatDate.ts";
 import HighlightContainer from "../../../pages/CsvAnalytics/ui/HighlightContainer.tsx";
+import {useLocation} from "react-router";
 
 const UploadForm = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const location = useLocation();
 
     const [isDragging, setIsDragging] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -37,7 +40,7 @@ const UploadForm = () => {
         handleIconClose()
         analyticStore.resetStore()
     }
-    const handleDragOver = (e: React.DragEvent) => {
+    const handleDragOver = (e: DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
     };
@@ -47,7 +50,7 @@ const UploadForm = () => {
     const handleDragLeave = () => {
         setIsDragging(false);
     };
-    const handleDrop = (e: React.DragEvent) => {
+    const handleDrop = (e: DragEvent) => {
         e.preventDefault();
         setIsDragging(false);
 
@@ -61,7 +64,7 @@ const UploadForm = () => {
             }
         }
     };
-    const handleInputFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         console.log(files)
         if (files && files.length > 0) {
@@ -98,7 +101,11 @@ const UploadForm = () => {
             });
         }
     }, [isDoneFile, analyticStore.isLoading])
-    console.log(analyticStore.response)
+
+    useEffect(() => {
+        handleClickResetAll()
+    }, [location.pathname])
+
     return (
         <div>
             <Typography extraClassname={styles.uploadFormTitle} size={30}>
