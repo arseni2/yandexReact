@@ -1,7 +1,7 @@
 import {create} from "zustand";
-import {generateCsvAPI} from "../../api/generator.ts";
+import {generateCsvAPI} from "../../../api/generator/generator.ts";
 
-type FileData = string; // например, CSV в виде строки
+type FileData = string;
 
 type GeneratorState = {
     data: FileData;

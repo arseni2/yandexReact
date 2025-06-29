@@ -1,6 +1,6 @@
-import {BASE_URL} from "./index.ts";
+import {BASE_URL} from "../index.ts";
 
-type AggregateCsvPayloadType = {
+export type AggregateCsvPayloadType = {
     rows: number;
     file: File;
 };

@@ -1,5 +1,5 @@
 import Dialog from "../../../widgets/Dialog/ui/Dialog.tsx";
-import type {HistoryItemType} from "../../../store/slices/history.ts";
+import type {HistoryItemType} from "../../../store/slices/history/history.ts";
 import HighlightItem from "../../../widgets/Highlight/ui/HighlightItem.tsx";
 import {getDateFromDay} from "../../CsvAnalytics/ui/HighlightContainer.tsx";
 
@@ -7,10 +7,11 @@ type PropsType = {
     open: boolean;
     setOpen: (value: boolean) => void;
     history: HistoryItemType
+    "data-testid"?: string
 }
-const HistoryItemDialog = ({open, setOpen, history}: PropsType) => {
+const HistoryItemDialog = ({open, setOpen, history, ...otherProps}: PropsType) => {
     return (
-        <Dialog setIsOpen={setOpen} isOpen={open}>
+        <Dialog setIsOpen={setOpen} isOpen={open} data-testid={otherProps['data-testid']}>
             <div style={{display: "flex", flexDirection: "column", gap: "13px"}}>
                 <HighlightItem bg={"#EACDFF"} title={`${history?.data?.total_spend_galactic}`}
                                description={"общие расходы в галактических кредитах"}/>

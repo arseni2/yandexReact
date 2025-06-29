@@ -1,12 +1,11 @@
 import HistoryItem from "../../../widgets/HistoryItem/ui/HistoryItem.tsx";
 import Button from "../../../shared/Button/ui/Button.tsx";
 import styles from "../css/History.module.css"
-import {NavLink} from "react-router";
-import {useHistoryStore} from "../../../store/slices/history.ts";
+import {NavLink} from "react-router-dom";
+import {useHistoryStore} from "../../../store/slices/history/history.ts";
 
 const History = () => {
     const historyStore = useHistoryStore()
-    // const [open, setOpen] = useState<Record<string, boolean>>({});
 
     const handleClickDelete = (id: number) => {
         historyStore.removeHistoryItem(id)
@@ -14,16 +13,8 @@ const History = () => {
     const handleClickClear = () => {
         historyStore.clearHistory()
     }
-    // const handleClickOpenModal = (historyId: number) => {
-    //     setOpen((prevState) => {
-    //         return {...prevState, [historyId]: true}
-    //     })
-    // }
-    // const handleClickCloseModal = (historyId: number) => {
-    //     setOpen((prevState) => {
-    //         return {...prevState, [historyId]: false}
-    //     })
-    // }
+
+
     return (
         <div>
             <div className={styles.container_history}>

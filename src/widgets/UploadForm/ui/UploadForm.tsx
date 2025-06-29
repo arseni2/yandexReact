@@ -4,11 +4,11 @@ import styles from '../css/UploadForm.module.css';
 import Button from "../../../shared/Button/ui/Button.tsx";
 import ButtonUpload, {ButtonStatus} from "../../../shared/Button/ui/ButtonUpload.tsx";
 import classNames from "classnames";
-import {useAnalyticStore} from "../../../store/slices/analytic.ts";
-import {useHistoryStore} from "../../../store/slices/history.ts";
+import {useAnalyticStore} from "../../../store/slices/analytic/analytic.ts";
+import {useHistoryStore} from "../../../store/slices/history/history.ts";
 import {formatDate} from "../../../pages/CsvGenerator/utils/formatDate.ts";
 import HighlightContainer from "../../../pages/CsvAnalytics/ui/HighlightContainer.tsx";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 
 const UploadForm = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -129,12 +129,13 @@ const UploadForm = () => {
                     id="inputFile"
                     type="file"
                     accept="text/csv"
+                    data-testid="inputFile"
                     hidden
                     ref={fileInputRef}
                 />
 
                 {isDoneFile
-                    ? <ButtonUpload handleCloseIcon={handleClickResetAll} buttonDescription={"готово!"}
+                    ? <ButtonUpload handleCloseIcon={handleClickResetAll} data-testid={"button-done-file"} buttonDescription={"готово!"}
                                     buttonTitle={file?.name} status={ButtonStatus.Done}/>
                     : analyticStore.isLoading
                         ? <ButtonUpload
@@ -143,8 +144,9 @@ const UploadForm = () => {
                             onClick={handleButtonClick}
                         />
                         : error
-                            ? <ButtonUpload buttonDescription={"упс, не то..."} buttonTitle={"Ошибка"} status={ButtonStatus.Error} handleCloseIcon={handleIconClose} />
+                            ? <ButtonUpload data-testid="upload-file-btn-error" buttonDescription={"упс, не то..."} buttonTitle={"Ошибка"} status={ButtonStatus.Error} handleCloseIcon={handleIconClose} />
                             : <ButtonUpload
+                                data-testid="upload-file-btn"
                                 handleCloseIcon={handleIconClose}
                                 status={!file ? ButtonStatus.White : ButtonStatus.Upload}
                                 buttonTitle={!file ? "Загрузить файл" : file.name}
@@ -159,7 +161,7 @@ const UploadForm = () => {
                 {isDoneFile
                     ? null
                     : !error && !analyticStore.isLoading &&
-                    <Button onClick={uploadFile} green={!disabled} disabled={disabled} text={"Отправить"}/>
+                    <Button onClick={uploadFile} green={!disabled} disabled={disabled} text={"Отправить"} data-testid={"send-btn"}/>
                 }
             </div>
 

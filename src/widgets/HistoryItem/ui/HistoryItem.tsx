@@ -5,7 +5,7 @@ import Smile from "../../../shared/Icons/ui/Smile.tsx";
 import SadSmile from "../../../shared/Icons/ui/SadSmile.tsx";
 import Trash from "../../../shared/Icons/ui/Trash.tsx";
 import styles from "../css/HistoryItem.module.css"
-import type {HistoryItemType} from "../../../store/slices/history.ts";
+import type {HistoryItemType} from "../../../store/slices/history/history.ts";
 import HistoryItemDialog from "../../../pages/History/ui/HistoryItemDialog.tsx";
 
 type PropsType = {
@@ -22,7 +22,7 @@ const HistoryItem = ({ history, handleClickDelete }: PropsType) => {
     }
     return (
         <>
-            <div style={{cursor: history.isCompleted ? "pointer" : "default"}} className={styles.container} onClick={handleClickOpen}>
+            <div style={{cursor: history.isCompleted ? "pointer" : "default"}} className={styles.container} onClick={handleClickOpen} data-testid={`history-item`}>
                 <div className={styles.item}>
                     <div className={styles.flex}>
                         <Document/>
@@ -33,11 +33,11 @@ const HistoryItem = ({ history, handleClickDelete }: PropsType) => {
                     <Typography alignCenter disabled={history.isCompleted}>Не удалось обработать <SadSmile/></Typography>
                 </div>
 
-                <div onClick={() => handleClickDelete(history.id)} className={styles.deleteBtn}>
+                <div onClick={() => handleClickDelete(history.id)} className={styles.deleteBtn} data-testid={"delete-btn"}>
                     <Trash/>
                 </div>
             </div>
-            <HistoryItemDialog history={history} setOpen={setOpen} open={open} />
+            <HistoryItemDialog history={history} setOpen={setOpen} open={open} data-testid={`history-item-dialog`} />
         </>
     );
 };

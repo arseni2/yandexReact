@@ -37,6 +37,7 @@ const ButtonUpload = (props: PropsType) => {
                         [styles.done]: status === ButtonStatus.Done,
                         [styles.error]: status === ButtonStatus.Error,
                     })}
+
                     {...props}
                 >
                     {status === ButtonStatus.Loading

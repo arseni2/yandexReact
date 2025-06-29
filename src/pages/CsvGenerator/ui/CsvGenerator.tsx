@@ -3,7 +3,7 @@ import Typography from "../../../shared/Typography/ui/Typography.tsx";
 import Button from "../../../shared/Button/ui/Button.tsx";
 import styles from "../css/CsvGenerator.module.css"
 import ButtonUpload, {ButtonStatus} from "../../../shared/Button/ui/ButtonUpload.tsx";
-import {useGeneratorStore} from "../../../store/slices/generator.ts";
+import {useGeneratorStore} from "../../../store/slices/generator/generator.ts";
 
 
 const CsvGenerator = () => {
@@ -17,9 +17,8 @@ const CsvGenerator = () => {
         setLoading(true);
 
         store.fetchGenerator()
-            //мб стоит в аналитику вынести
             .then(() => {
-
+                setError(null);
             })
             .catch((err) => {
                 setError('Ошибка при генерации файла');
@@ -59,7 +58,7 @@ const CsvGenerator = () => {
 
             <div className={styles.container_center}>
                 {error ? (
-                        <ButtonUpload handleCloseIcon={handleClose} buttonTitle={"Ошибка"} buttonDescription={"упс, не то..."} status={ButtonStatus.Error}/>
+                        <ButtonUpload handleCloseIcon={handleClose} buttonTitle={"Ошибка"} buttonDescription={"упс, не то..."} status={ButtonStatus.Error} data-testid={"button-generate-error"}/>
                     )
                     : store.file.data ? (
                         <ButtonUpload
@@ -67,6 +66,7 @@ const CsvGenerator = () => {
                             buttonTitle={"Done!"}
                             buttonDescription={"файл сгенерирован!"}
                             status={ButtonStatus.Done}
+                            data-testid={"button-generate-done"}
                         />
                     ) : loading ? (
                         <ButtonUpload
@@ -74,9 +74,10 @@ const CsvGenerator = () => {
                             buttonTitle={""}
                             buttonDescription={""}
                             status={ButtonStatus.Loading}
+                            data-testid={"button-generate-loading"}
                         />
                     ) : (
-                        <Button onClick={handleClick} green text={"Начать генерацию"}/>
+                        <Button data-testid="button-generate-start" onClick={handleClick} green text={"Начать генерацию"}/>
                     )
                 }
             </div>

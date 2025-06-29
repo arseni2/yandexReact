@@ -1,6 +1,6 @@
-import {BASE_URL} from "./index.ts";
+import {BASE_URL} from "../index.ts";
 
-type GenerateCsvPayloadType = {
+export type GenerateCsvPayloadType = {
     size: number
     withErrors: "on" | "off"
     maxSpend: string

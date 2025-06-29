@@ -9,7 +9,7 @@ type PropsType = {
     children: ReactNode
 }
 
-const Dialog = ({ isOpen, setIsOpen, children }: PropsType) => {
+const Dialog = ({ isOpen, setIsOpen, children, ...otherProps }: PropsType) => {
     if (!isOpen) return null;
 
     const handleClose = (e: React.MouseEvent) => {
@@ -22,9 +22,9 @@ const Dialog = ({ isOpen, setIsOpen, children }: PropsType) => {
     };
 
     return createPortal(
-        <div className={styles.overlay} onClick={handleClose}>
+        <div className={styles.overlay} onClick={handleClose} {...otherProps}>
             <button className={styles.closeBtn} onClick={handleClose}>
-                <div className={styles.closeBtnItem}>
+                <div className={styles.closeBtnItem} data-testid={"close-dialog-btn"}>
                     <Close height={"28"} width={"28"} />
                 </div>
             </button>

@@ -1,4 +1,4 @@
-import type {AggregatedData} from "../../../api/analitycs.ts";
+import type {AggregatedData} from "../../../api/analytic/analitycs.ts";
 import HighlightItem from "../../../widgets/Highlight/ui/HighlightItem.tsx";
 import styles from "../css/CsvAnalytics.module.css"
 

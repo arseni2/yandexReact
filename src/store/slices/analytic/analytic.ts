@@ -1,12 +1,10 @@
 import {create} from "zustand";
-import {aggregateCsvAPI, type AggregatedData, DEFAULT_DATA} from "../../api/analitycs.ts";
+import {aggregateCsvAPI, type AggregatedData, DEFAULT_DATA} from "../../../api/analytic/analitycs.ts";
 
 export type SendFilePayload = {
     file: File;
 };
-export type AnalyticData = {
-    rowsProcessed: number;
-};
+
 type AnalyticStore = {
     sendFile: (payload: SendFilePayload) => Promise<AggregatedData>;
     response: AggregatedData;

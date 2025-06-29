@@ -1,6 +1,6 @@
 import styles from "../css/Header.module.css"
 import Logo from "../../../shared/Icons/ui/Logo.tsx";
-import {NavLink} from "react-router";
+import {NavLink} from "react-router-dom";
 import MageUpload from "../../../shared/Icons/ui/MageUpload.tsx";
 import Typography from "../../../shared/Typography/ui/Typography.tsx";
 import CsvGenerator from "../../../shared/Icons/ui/CSVGenerator.tsx";
@@ -30,7 +30,7 @@ const Header = () => {
 
                 <NavLink className={({ isActive }) =>
                     isActive ? `${styles.link} ${styles.active}` : styles.link
-                } to={"/history"}>
+                } to={"/history"} data-testid="history-link">
                     <History />
                     <Typography size={30}>История</Typography>
                 </NavLink>

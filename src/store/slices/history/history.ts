@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import {persist} from "zustand/middleware";
-import type {AggregatedData} from "../../api/analitycs.ts";
+import type {AggregatedData} from "../../../api/analytic/analitycs.ts";
 
 export type HistoryItemType = {
     id: number;
@@ -9,7 +9,7 @@ export type HistoryItemType = {
     isCompleted: boolean
     data?: AggregatedData
 }
-type HistoryStore = {
+export type HistoryStore = {
     items: HistoryItemType[];
     addHistoryItem: (item: HistoryItemType) => void;
     removeHistoryItem: (id: number) => void;
