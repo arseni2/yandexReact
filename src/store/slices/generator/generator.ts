@@ -1,5 +1,5 @@
-import {create} from "zustand";
-import {generateCsvAPI} from "../../../api/generator/generator.ts";
+import { create } from 'zustand';
+import { generateCsvAPI } from '../../../api/generator/generator.ts';
 
 type FileData = string;
 
@@ -39,7 +39,7 @@ export const useGeneratorStore = create<GeneratorStore>((set) => {
                         }
                     }
                 })
-            } catch (error) {
+            } catch {
                 throw new Error("Error while fetching file data.");
             }
         }

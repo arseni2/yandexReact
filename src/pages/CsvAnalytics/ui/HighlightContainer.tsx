@@ -6,6 +6,7 @@ type PropsType = {
     data: AggregatedData
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getDateFromDay(dayOfYear: number): string {
     const months = [
         { name: "января", days: 31 },

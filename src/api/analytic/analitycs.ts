@@ -45,7 +45,7 @@ export const aggregateCsvAPI = async (
 
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
-    let result = { ...DEFAULT_DATA };
+    const result = { ...DEFAULT_DATA };
 
     while (true) {
         const { done, value } = await reader.read();

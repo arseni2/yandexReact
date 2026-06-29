@@ -6,9 +6,15 @@ import {useAnalyticStore} from "./analytic.ts";
 vi.mock('../../../api/analytic/analitycs', () => ({
     aggregateCsvAPI: vi.fn(),
     DEFAULT_DATA: {
-        totalRows: 0,
-        uniqueUsers: 0,
-        averageSpend: 0,
+        total_spend_galactic: 0,
+        rows_affected: 0,
+        less_spent_at: 0,
+        big_spent_at: 0,
+        less_spent_value: 0,
+        big_spent_value: 0,
+        average_spend_galactic: 0,
+        big_spent_civ: "",
+        less_spent_civ: "",
     },
 }))
 

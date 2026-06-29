@@ -1,53 +1,70 @@
-import { BASE_URL } from '../index'
-import {generateCsvAPI, type GenerateCsvPayloadType} from "./generator.ts";
+import {beforeEach, describe, expect, test, vi} from 'vitest';
+import {BASE_URL} from '../index';
+import {generateCsvAPI, type GenerateCsvPayloadType} from './generator.ts';
 
+function createMockResponse(ok: boolean, body?: string) {
+    return {
+        ok,
+        text: () => Promise.resolve(body ?? ''),
+    };
+}
 
 describe('generateCsvAPI', () => {
-    const mockPayload: GenerateCsvPayloadType = {
-        size: 100,
-        withErrors: 'on',
-        maxSpend: '500'
-    }
-
-    let fetchSpy: ReturnType<typeof vi.fn>
+    let fetchSpy: ReturnType<typeof vi.fn>;
 
     beforeEach(() => {
-        fetchSpy = vi.fn()
-        vi.stubGlobal('fetch', fetchSpy)
-    })
+        vi.restoreAllMocks();
+        fetchSpy = vi.fn();
+        vi.stubGlobal('fetch', fetchSpy);
+    });
 
-    test('должен отправить корректный GET-запрос', async () => {
-        fetchSpy.mockResolvedValueOnce({
-            ok: true,
-            text: () => Promise.resolve('id,name\n1,item')
-        } as any)
+    test('отправляет GET-запрос с корректным URL', async () => {
+        // Arrange
+        const payload: GenerateCsvPayloadType = {size: 100, withErrors: 'on', maxSpend: '500'};
+        fetchSpy.mockResolvedValueOnce(createMockResponse(true, 'id,name\n1,item'));
 
-        await generateCsvAPI(mockPayload)
+        // Act
+        await generateCsvAPI(payload);
 
-        const expectedUrl = `${BASE_URL}/report?size=100&withErrors=on&maxSpend=500`
+        // Assert
+        expect(fetchSpy).toHaveBeenCalledWith(
+            `${BASE_URL}/report?size=100&withErrors=on&maxSpend=500`,
+        );
+    });
 
-        expect(fetch).toHaveBeenCalledWith(expectedUrl)
-        expect(fetchSpy).toHaveBeenCalled()
-    })
+    test('возвращает CSV-данные при успешном ответе', async () => {
+        // Arrange
+        const payload: GenerateCsvPayloadType = {size: 50, withErrors: 'off', maxSpend: '100'};
+        const csvData = 'id,name\n1,item';
+        fetchSpy.mockResolvedValueOnce(createMockResponse(true, csvData));
 
-    test('должен вернуть CSV-данные при успешном ответе', async () => {
-        const csvData = 'id,name\n1,item'
+        // Act
+        const result = await generateCsvAPI(payload);
 
-        fetchSpy.mockResolvedValueOnce({
-            ok: true,
-            text: () => Promise.resolve(csvData)
-        } as any)
+        // Assert
+        expect(result).toBe(csvData);
+    });
 
-        const result = await generateCsvAPI(mockPayload)
+    test('выбрасывает ошибку при неудачном ответе', async () => {
+        // Arrange
+        const payload: GenerateCsvPayloadType = {size: 10, withErrors: 'on', maxSpend: '0'};
+        fetchSpy.mockResolvedValueOnce(createMockResponse(false));
 
-        expect(result).toBe(csvData)
-    })
+        // Act & Assert
+        await expect(generateCsvAPI(payload)).rejects.toThrow('Failed to generate Csv');
+    });
 
-    test('должен выбросить ошибку при неудачном ответе', async () => {
-        fetchSpy.mockResolvedValueOnce({
-            ok: false
-        } as any)
+    test('корректно кодирует разные значения payload в URL', async () => {
+        // Arrange
+        const payload: GenerateCsvPayloadType = {size: 0, withErrors: 'off', maxSpend: '9999'};
+        fetchSpy.mockResolvedValueOnce(createMockResponse(true, ''));
 
-        await expect(generateCsvAPI(mockPayload)).rejects.toThrow('Failed to generate Csv')
-    })
-})
+        // Act
+        await generateCsvAPI(payload);
+
+        // Assert
+        expect(fetchSpy).toHaveBeenCalledWith(
+            `${BASE_URL}/report?size=0&withErrors=off&maxSpend=9999`,
+        );
+    });
+});

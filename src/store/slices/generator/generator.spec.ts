@@ -46,7 +46,7 @@ describe('useGeneratorStore', () => {
 
         try {
             await useGeneratorStore.getState().fetchGenerator()
-        } catch (e) {
+        } catch {
             // Ожидаем ошибку
         }
 
